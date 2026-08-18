@@ -11,6 +11,6 @@ class Program
         int BCNN = (a * b) / GCD(a, b);
         float UCLN = (a * b) / BCNN;
         Console.WriteLine("UCLN cua {0} va {1} la: {2}", a, b, UCLN);
-
+        Console.WriteLine("LMAO");
     }
 }
