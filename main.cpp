@@ -23,6 +23,7 @@ int main() {
     int UCLN = GCD(a, b);
 
     cout << "UCLN cua " << a << " va " << b << " la: " << UCLN << endl;
-
+Console.WriteLine("LMAO");
     return 0;
+    
 }
