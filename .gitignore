@@ -1,8 +1,22 @@
-main
-.DS_Store
+# Binaries & Build Output
 bin/
 obj/
 *.exe
 *.o
+*.out
+*.dll
+main
+
+# IDE & Project files
 *.sln
 *.csproj
+*.user
+.vscode/
+.vs/
+.idea/
+
+# OS files
+.DS_Store
+*/.DS_Store
+Thumbs.db
+
