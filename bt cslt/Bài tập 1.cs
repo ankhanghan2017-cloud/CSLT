@@ -1,4 +1,4 @@
-using System;
+/*using System;
 
 class Program
 {
@@ -504,7 +504,7 @@ class Program
         Console.WriteLine("TONG TIEN VE: " + tongTienVe + " VND");
     }
 
-    static void Main(string[] args)
+   /* static void Main(string[] args)
     {
         bai1();
         bai2();
@@ -522,4 +522,4 @@ class Program
         bai14();
         bai15();
     }
-}
+}*/
