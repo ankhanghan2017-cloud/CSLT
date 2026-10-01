@@ -1,4 +1,4 @@
-using System;
+/*using System;
 using System.Collections.Generic;
 
 namespace CSLT
@@ -28,14 +28,12 @@ namespace CSLT
         static readonly Random rand = new Random();
 
         #region BAI 1: Khoi tao va hien thi Jagged Array mac dinh
-        /*
-         * 1. Create a jagged array and initialize it using the following values 
-         *    for its rows and columns; Then, display it.
-         *    1 1 1 1 1
-         *    2 2
-         *    3 3 3 3
-         *    4 4
-         */
+        // 1. Create a jagged array and initialize it using the following values 
+        //    for its rows and columns; Then, display it.
+        //    1 1 1 1 1
+        //    2 2
+        //    3 3 3 3
+        //    4 4
         static void RunBai1()
         {
             Console.WriteLine("\n=======================================================");
@@ -58,15 +56,13 @@ namespace CSLT
         #endregion
 
         #region BAI 2: Jagged Array voi so nguyen (Random / Nhap tay & Cac thao tac)
-        /*
-         * 2. Create a Jagged Array with random integer numbers (or by user input) 
-         *    by getting the number of rows and columns from the user and printing 
-         *    the data in the array to the user. Then, create functions to implement:
-         *    1. Print the biggest number of each row and the largest number of the whole array.
-         *    2. Sort values ascending of each row.
-         *    3. Print items of the array that are prime.
-         *    4. Search and print all positions of a number (enter from the user).
-         */
+        // 2. Create a Jagged Array with random integer numbers (or by user input) 
+        //    by getting the number of rows and columns from the user and printing 
+        //    the data in the array to the user. Then, create functions to implement:
+        //    1. Print the biggest number of each row and the largest number of the whole array.
+        //    2. Sort values ascending of each row.
+        //    3. Print items of the array that are prime.
+        //    4. Search and print all positions of a number (enter from the user).
 
         // Ham nhap so nguyen duong
         static int ReadPositiveInt(string prompt)
@@ -295,19 +291,17 @@ namespace CSLT
         #endregion
 
         #region BAI 3 (***): Quan ly 3 nhom lam viec cong ty X
-        /*
-         * The X company has 3 working groups; 
-         * group 1 has 5 members, group 2 has 3 members, and group 3 has 6 members. 
-         * The data stored for each member has an ID number, full name, and completed tasks. 
-         * An ID identifies each member.
-         * 
-         * Tasks:
-         * 1. Initialize an array with pre-assigned values or values entered from the keyboard.
-         * 2. Print a list of all members.
-         * 3. Print the information on a member when the ID is known.
-         * 4. Print the member with the highest number of completed tasks.
-         * Menu-driven interface.
-         */
+        // The X company has 3 working groups; 
+        // group 1 has 5 members, group 2 has 3 members, and group 3 has 6 members. 
+        // The data stored for each member has an ID number, full name, and completed tasks. 
+        // An ID identifies each member.
+        // 
+        // Tasks:
+        // 1. Initialize an array with pre-assigned values or values entered from the keyboard.
+        // 2. Print a list of all members.
+        // 3. Print the information on a member when the ID is known.
+        // 4. Print the member with the highest number of completed tasks.
+        // Menu-driven interface.
 
         // Khoi tao mang 3 nhom mac dinh
         static Member[][] CreateDefaultCompanyData()
@@ -620,4 +614,4 @@ namespace CSLT
         }
         #endregion
     }
-}
+}*/
