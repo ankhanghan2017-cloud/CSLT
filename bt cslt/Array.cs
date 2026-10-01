@@ -1,4 +1,4 @@
-using System;
+/*using System;
 using System.Collections.Generic;
 
 namespace CSLT
@@ -503,6 +503,293 @@ namespace CSLT
         }
         #endregion
 
+        #region PART 4: Jagged Array Basics (Bai 1 & Bai 2)
+        // Bai 1: Khoi tao va hien thi mang rang cua co san
+        static void RunPart4_Bai1()
+        {
+            Console.WriteLine("\n--- BAI 1: KHOI TAO VA HIEN THI JAGGED ARRAY CO SAN ---");
+            int[][] jaggedArr = new int[][]
+            {
+                new int[] { 1, 1, 1, 1, 1 },
+                new int[] { 2, 2 },
+                new int[] { 3, 3, 3, 3 },
+                new int[] { 4, 4 }
+            };
+
+            for (int i = 0; i < jaggedArr.Length; i++)
+            {
+                Console.Write($"Hang {i} ({jaggedArr[i].Length} phan tu): \t");
+                for (int j = 0; j < jaggedArr[i].Length; j++)
+                {
+                    Console.Write($"{jaggedArr[i][j],4} ");
+                }
+                Console.WriteLine();
+            }
+        }
+
+        // Bai 2: Jagged array so nguyen va cac chuc nang
+        static bool IsPrimeNumber(int n)
+        {
+            if (n < 2) return false;
+            for (int i = 2; i * i <= n; i++)
+            {
+                if (n % i == 0) return false;
+            }
+            return true;
+        }
+
+        static void RunPart4_Bai2()
+        {
+            Console.WriteLine("\n--- BAI 2: JAGGED ARRAY SO NGUYEN (RANDOM/NHAP TAY) ---");
+            Console.Write("Nhap so hang (rows) cua Jagged Array: ");
+            if (!int.TryParse(Console.ReadLine(), out int numRows) || numRows <= 0)
+            {
+                Console.WriteLine("So hang khong hop le!");
+                return;
+            }
+
+            int[][] jaggedArr = new int[numRows][];
+            Console.WriteLine("Chon che do nhap: 1. Random (1-99) | 2. Nhap tay tu ban phim");
+            Console.Write("Chon (1 hoac 2): ");
+            bool isRandom = Console.ReadLine() != "2";
+
+            for (int i = 0; i < numRows; i++)
+            {
+                Console.Write($"Nhap so cot cho hang {i}: ");
+                int cols = int.Parse(Console.ReadLine()!);
+                jaggedArr[i] = new int[cols];
+                for (int j = 0; j < cols; j++)
+                {
+                    if (isRandom)
+                    {
+                        jaggedArr[i][j] = rand.Next(1, 100);
+                    }
+                    else
+                    {
+                        Console.Write($"Phan tu [{i}][{j}]: ");
+                        jaggedArr[i][j] = int.Parse(Console.ReadLine()!);
+                    }
+                }
+            }
+
+            Console.WriteLine("\nDu lieu mang:");
+            for (int i = 0; i < jaggedArr.Length; i++)
+            {
+                Console.Write($"Hang {i}: \t");
+                for (int j = 0; j < jaggedArr[i].Length; j++)
+                {
+                    Console.Write($"{jaggedArr[i][j],4} ");
+                }
+                Console.WriteLine();
+            }
+
+            // 1. So lon nhat tung hang va toan mang
+            int overallMax = int.MinValue;
+            Console.WriteLine("\n1. So lon nhat cua tung hang va toan mang:");
+            for (int i = 0; i < jaggedArr.Length; i++)
+            {
+                if (jaggedArr[i].Length == 0) continue;
+                int rowMax = jaggedArr[i][0];
+                for (int j = 1; j < jaggedArr[i].Length; j++)
+                {
+                    if (jaggedArr[i][j] > rowMax) rowMax = jaggedArr[i][j];
+                }
+                Console.WriteLine($" - Hang {i}: Max = {rowMax}");
+                if (rowMax > overallMax) overallMax = rowMax;
+            }
+            Console.WriteLine($" => Max toan bo mang = {overallMax}");
+
+            // 2. Sap xep tang dan tung hang
+            Console.WriteLine("\n2. Mang sau khi sap xep tang dan tung hang:");
+            for (int i = 0; i < jaggedArr.Length; i++)
+            {
+                Array.Sort(jaggedArr[i]);
+                Console.Write($"Hang {i}: \t");
+                for (int j = 0; j < jaggedArr[i].Length; j++)
+                {
+                    Console.Write($"{jaggedArr[i][j],4} ");
+                }
+                Console.WriteLine();
+            }
+
+            // 3. Cac phan tu la so nguyen to
+            Console.WriteLine("\n3. Cac phan tu la so nguyen to:");
+            int countPrime = 0;
+            for (int i = 0; i < jaggedArr.Length; i++)
+            {
+                for (int j = 0; j < jaggedArr[i].Length; j++)
+                {
+                    if (IsPrimeNumber(jaggedArr[i][j]))
+                    {
+                        Console.WriteLine($" - Gia tri {jaggedArr[i][j]} tai [Hang {i}, Cot {j}]");
+                        countPrime++;
+                    }
+                }
+            }
+            if (countPrime == 0) Console.WriteLine("Khong co so nguyen to nao trong mang.");
+
+            // 4. Tim vi tri cua mot so
+            Console.Write("\n4. Nhap so can tim kiem vi tri: ");
+            if (int.TryParse(Console.ReadLine(), out int target))
+            {
+                var foundList = new List<string>();
+                for (int i = 0; i < jaggedArr.Length; i++)
+                {
+                    for (int j = 0; j < jaggedArr[i].Length; j++)
+                    {
+                        if (jaggedArr[i][j] == target) foundList.Add($"[{i}, {j}]");
+                    }
+                }
+                if (foundList.Count > 0)
+                {
+                    Console.WriteLine($"So {target} xuat hien tai vi tri: {string.Join(", ", foundList)}");
+                }
+                else
+                {
+                    Console.WriteLine($"Khong tim thay so {target} trong mang.");
+                }
+            }
+        }
+
+        static void RunPart4()
+        {
+            RunPart4_Bai1();
+            RunPart4_Bai2();
+        }
+        #endregion
+
+        #region PART 5: Company X Working Groups (Bai 3)
+        // Lop luu tru thanh vien cong ty X
+        class CompanyMember
+        {
+            public string Id { get; set; }
+            public string FullName { get; set; }
+            public int CompletedTasks { get; set; }
+
+            public CompanyMember(string id, string fullName, int completedTasks)
+            {
+                Id = id;
+                FullName = fullName;
+                CompletedTasks = completedTasks;
+            }
+        }
+
+        static CompanyMember[][] CreateCompanyData()
+        {
+            CompanyMember[][] company = new CompanyMember[3][];
+            company[0] = new CompanyMember[]
+            {
+                new CompanyMember("G1-01", "Nguyen Van An", 15),
+                new CompanyMember("G1-02", "Tran Thi Bich", 22),
+                new CompanyMember("G1-03", "Le Hoang Cuong", 18),
+                new CompanyMember("G1-04", "Pham Minh Duc", 32),
+                new CompanyMember("G1-05", "Hoang Thi En", 25)
+            };
+            company[1] = new CompanyMember[]
+            {
+                new CompanyMember("G2-01", "Doan Van Giang", 12),
+                new CompanyMember("G2-02", "Vu Thi Hoa", 28),
+                new CompanyMember("G2-03", "Bui Quang Khai", 35)
+            };
+            company[2] = new CompanyMember[]
+            {
+                new CompanyMember("G3-01", "Ngo Thanh Lam", 20),
+                new CompanyMember("G3-02", "Dinh Van Manh", 14),
+                new CompanyMember("G3-03", "Ta Thi Nga", 35),
+                new CompanyMember("G3-04", "Phan Van Oanh", 19),
+                new CompanyMember("G3-05", "Cao Xuan Phuc", 27),
+                new CompanyMember("G3-06", "Duong My Quynh", 30)
+            };
+            return company;
+        }
+
+        static void RunPart5()
+        {
+            CompanyMember[][] company = CreateCompanyData();
+
+            while (true)
+            {
+                Console.WriteLine("\n-------------------------------------------------------");
+                Console.WriteLine("      MENU PART 5: QUAN LY 3 NHOM LAM VIEC CONG TY X    ");
+                Console.WriteLine("-------------------------------------------------------");
+                Console.WriteLine("1. In danh sach tat ca thanh vien theo tung nhom");
+                Console.WriteLine("2. Tim kiem thong tin thanh vien theo ID");
+                Console.WriteLine("3. In thanh vien co so luong cong viec hoan thanh cao nhat");
+                Console.WriteLine("0. Quay lai");
+                Console.Write("Chon (0-3): ");
+
+                string? choice = Console.ReadLine();
+                if (choice == "0") break;
+
+                switch (choice)
+                {
+                    case "1":
+                        Console.WriteLine("\n--- DANH SACH THANH VIEN CONG TY X ---");
+                        for (int g = 0; g < company.Length; g++)
+                        {
+                            Console.WriteLine($"\n>> NHOM {g + 1} ({company[g].Length} thanh vien):");
+                            Console.WriteLine(string.Format("{0,-8} | {1,-10} | {2,-22} | {3,-10}", "STT", "ID", "HO VA TEN", "TASKS"));
+                            for (int m = 0; m < company[g].Length; m++)
+                            {
+                                var mem = company[g][m];
+                                Console.WriteLine(string.Format("{0,-8} | {1,-10} | {2,-22} | {3,5}",
+                                    $"{g + 1}.{m + 1}", mem.Id, mem.FullName, mem.CompletedTasks));
+                            }
+                        }
+                        break;
+
+                    case "2":
+                        Console.Write("\nNhap ID can tim: ");
+                        string? targetId = Console.ReadLine()?.Trim();
+                        bool found = false;
+                        for (int g = 0; g < company.Length; g++)
+                        {
+                            for (int m = 0; m < company[g].Length; m++)
+                            {
+                                var mem = company[g][m];
+                                if (string.Equals(mem.Id, targetId, StringComparison.OrdinalIgnoreCase))
+                                {
+                                    Console.WriteLine($"Tim thay: Nhom {g + 1} | ID: {mem.Id} | Ten: {mem.FullName} | Tasks: {mem.CompletedTasks}");
+                                    found = true;
+                                    break;
+                                }
+                            }
+                            if (found) break;
+                        }
+                        if (!found) Console.WriteLine($"Khong tim thay thanh vien co ID '{targetId}'.");
+                        break;
+
+                    case "3":
+                        int maxTasks = -1;
+                        for (int g = 0; g < company.Length; g++)
+                        {
+                            for (int m = 0; m < company[g].Length; m++)
+                            {
+                                if (company[g][m].CompletedTasks > maxTasks)
+                                    maxTasks = company[g][m].CompletedTasks;
+                            }
+                        }
+                        Console.WriteLine($"\nThanh vien co so tasks hoan thanh cao nhat ({maxTasks} tasks):");
+                        for (int g = 0; g < company.Length; g++)
+                        {
+                            for (int m = 0; m < company[g].Length; m++)
+                            {
+                                if (company[g][m].CompletedTasks == maxTasks)
+                                {
+                                    Console.WriteLine($" - Nhom {g + 1}: {company[g][m].FullName} (ID: {company[g][m].Id})");
+                                }
+                            }
+                        }
+                        break;
+
+                    default:
+                        Console.WriteLine("Lua chon khong hop le!");
+                        break;
+                }
+            }
+        }
+        #endregion
+
         static void Main(string[] args)
         {
             while (true)
@@ -513,8 +800,10 @@ namespace CSLT
                 Console.WriteLine("1. Thao tac tren Mang 1 chieu (8 ham co ban)");
                 Console.WriteLine("2. Bubble Sort (10 so) & Linear Search (tim tu)");
                 Console.WriteLine("3. Ma tran 2 chieu (Matrix N x M)");
+                Console.WriteLine("4. Mang rang cua (Jagged Array - Bai 1 & Bai 2)");
+                Console.WriteLine("5. Quan ly 3 nhom cong ty X (Jagged Array - Bai 3)");
                 Console.WriteLine("0. Thoat");
-                Console.Write("Chon bai (0-3): ");
+                Console.Write("Chon bai (0-5): ");
 
                 string? choice = Console.ReadLine();
                 switch (choice)
@@ -528,6 +817,12 @@ namespace CSLT
                     case "3":
                         RunPart3();
                         break;
+                    case "4":
+                        RunPart4();
+                        break;
+                    case "5":
+                        RunPart5();
+                        break;
                     case "0":
                         Console.WriteLine("Thoat chuong trinh.");
                         return;
@@ -538,4 +833,4 @@ namespace CSLT
             }
         }
     }
-}
+}*/
